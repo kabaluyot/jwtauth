@@ -164,12 +164,12 @@ func Authenticator(next http.Handler) http.Handler {
 		token, _, err := FromContext(r.Context())
 
 		if err != nil {
-			http.Error(w, http.StatusText(401), 401)
+			http.Error(w, `{"message": "Unauthorized access.", "status":401,"success":false}`, 401)
 			return
 		}
 
 		if token == nil || !token.Valid {
-			http.Error(w, http.StatusText(401), 401)
+			http.Error(w, `{"message": "Unauthorized access.", "status":401,"success":false}`, 401)
 			return
 		}
 
